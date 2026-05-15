@@ -1,0 +1,264 @@
+@import './smart-grid';
+@include reset();
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+$color_primary: #90F95E;
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-weight: 700;
+    src: url("../fonts/SF-Pro-Display-Bold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-weight: 400;
+    src: url("../fonts/SF-Pro-Display-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-weight: 300;
+    src: url("../fonts/SF-Pro-Display-Light.otf") format("opentype");
+}
+
+
+* {
+    box-sizing: border-box;
+    font-family: 'SF Pro Display', sans-serif;
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    font-size: 16px;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.title-primary {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 57px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-bottom: 50px;
+
+    span {
+        display: inline-block;
+        position: relative;
+
+        &::before {
+            content: '';
+            background: linear-gradient(90deg, #90F95E -1.09%, #4BD635 100%);
+            height: 7px;
+            border-radius: 18px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+    }
+
+    @include sm-block {
+        font-size: 24px;
+        line-height: 1.4;
+        margin-bottom: 30px;
+    }
+}
+
+.desc-primary {
+    width: 600px;
+    max-width: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    color: #5D5D5D;
+    margin: 0 auto;
+}
+
+.btn_secondary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    color: #4A18A9;
+    font-size: 24px;
+    font-weight: 400;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+
+    @include sm-block {
+        font-size: 18px;
+    }
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 1rem ;
+    color: #1E1E1E;
+    background-color: $color_primary;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 18px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 12px 0px #00000026;
+    transition: all 300ms ease;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 24px 6px #00000026;
+    }
+
+    @include sm-block {
+        font-size: 18px;
+    }
+}
+
+$width: 10;
+$pulse: #ffd51a;
+
+@keyframes pulse-primary {
+    0% {
+        box-shadow: 0 0 0 0 rgba($pulse, .8);
+    }
+
+    40% {
+        box-shadow: 0 0 0px #{$width / 2}px rgba($pulse, .5);
+
+    }
+
+    80% {
+        box-shadow: 0 0 3px #{$width}px rgba($pulse, 0);
+
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba($pulse, 0);
+    }
+}
+
+.container {
+    max-width: 1150px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0 15px;
+
+    @include sm-block {
+        padding: 0 15px;
+    }
+}
+
+.overhidden {
+    overflow: hidden;
+}
+
+.container-mini {
+    max-width: 1000px;
+    margin: 0 auto;
+
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.show-xs {
+    display: none !important;
+    @include xs(display, block !important);
+}
+
+.show-sm {
+    display: none !important;
+    @include sm(display, block !important);
+}
+
+.hide-sm {
+    @include sm-block {
+        display: none !important;
+    }
+}
+
+.hide-xs {
+    @include xs-block {
+        display: none !important;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.row {
+    @include row-flex();
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-center-md {
+    text-align: initial;
+
+    @include md-block {
+        text-align: center;
+    }
+}
+
+button {
+    appearance: none;
+}
+
+@mixin pulse($color, $width, $id) {
+    animation: pulse-#{$id} 2s linear infinite;
+
+
+    @keyframes pulse-#{$id} {
+        0% {
+            box-shadow: 0 0 0 0 rgba($color, .8);
+        }
+
+        10% {
+            transform: scale(1.05);
+        }
+
+        20% {
+            transform: scale(1.05);
+        }
+
+        25% {
+            transform: scale(1);
+        }
+
+        40% {
+            box-shadow: 0 0 0px #{$width / 2} rgba($color, .5);
+
+        }
+
+        80% {
+            box-shadow: 0 0 3px #{$width} rgba($color, 0);
+
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba($color, 0);
+        }
+    }
+}
+
+.pulse {
+    @include pulse(#fff, 10px, pulse-primary);
+}

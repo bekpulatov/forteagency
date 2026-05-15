@@ -209,10 +209,25 @@ doit(() => {
 
 doit(() => {
     let video = document.querySelector('#video');
+  if (!video) return;
 
-    $('#button_play').click((e) => {
-        video.play();
-        $(e.currentTarget).addClass('hide');
-        $(video).attr('controls', true);
-    });
+  function startVideo() {
+    if (!video.paused) return;
+    video.play();
+    $('#button_play').addClass('hide');
+    $(video).attr('controls', true);
+  }
+
+  $('#button_play').click((e) => {
+    e.stopPropagation();
+    startVideo();
+  });
+
+  $('#video').click(() => {
+    startVideo();
+  });
+
+  $('.media_block .video').click(() => {
+    startVideo();
+  });
 });

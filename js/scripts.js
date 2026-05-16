@@ -211,23 +211,24 @@ doit(() => {
     let video = document.querySelector('#video');
   if (!video) return;
 
-  function startVideo() {
-    if (!video.paused) return;
-    video.play();
-    $('#button_play').addClass('hide');
-    $(video).attr('controls', true);
+  function toggleVideo() {
+    if (video.paused) {
+      video.play();
+      $('#button_play').addClass('hide');
+      video.controls = true;
+    } else {
+      video.pause();
+    }
   }
 
   $('#button_play').click((e) => {
     e.stopPropagation();
-    startVideo();
+    toggleVideo();
   });
 
-  $('#video').click(() => {
-    startVideo();
-  });
-
-  $('.media_block .video').click(() => {
-    startVideo();
+  video.addEventListener('click', (e) => {
+    if (e.target !== video) return;
+    e.preventDefault();
+    toggleVideo();
   });
 });
